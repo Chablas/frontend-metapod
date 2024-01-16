@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/top-nav.css' %}">
+</head>
+
+<body>
+    <nav class="nav">
+        <a href="{% url 'divisas' %}" id="logo">
+            <img src="{% static 'images/logo.jpg' %}" style="height: 60px; width: 60px;">
+        </a>
+        <div id="right">
+            {% if is_user_authenticated %}
+                <a href="{% url 'divisas' %}">Conversor</a>
+                <a href="{% url 'crear_divisa' %}">Gestionar Divisas</a>
+                <a href="{% url 'cerrar_sesion' %}">Cerrar Sesión</a>
+            {% else %}
+                <a href="{% url 'divisas' %}">Conversor</a>
+                <a href="{% url 'iniciar_sesion' %}">Iniciar Sesión</a>
+                <a href="{% url 'registrar_usuario' %}">Regístrate</a>
+            {% endif %}
+        </div>
+    </nav>
+    
+</body>
+
+</html>

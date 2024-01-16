@@ -1,0 +1,35 @@
+#right a:hover {
+    background-color: #398581;
+    color: #DAE8E7;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /*background-color: rgb(15, 12, 58);*/
+    /*background-color: #001f3f;*/
+    background-image: linear-gradient(62deg, #398581 0%, #00C6B3 100%);
+    padding: 10px;
+}
+
+#right > a {
+    margin-left: 10px;
+    text-decoration: none;
+    color: #DAE8E7;
+    font-weight: bold;
+    padding: 12px;
+}
+
+body {
+    margin: 0;
+}
+
+#right {
+    margin-right: 10%;
+}
+
+#logo {
+    margin-left: 10%;
+}
+

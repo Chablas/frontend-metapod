@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/registrar.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
+</head>
+
+<body>
+    <div class="contenedor">
+        <div class="parte1">
+            <img src="{% static 'images/logo.jpg' %}">
+        </div>
+        <div class="parte2">
+            <div id="formulario">
+                <h1>¡Regístrate!</h1>
+                <form class="form" method="post" action="{% url 'registrar_usuario' %}">
+                    {% csrf_token %}
+                    <label for="correo">Correo</label>
+                    <input type="email" id="correo" name="email" placeholder="Escribe tu correo" required>
+                    <label for="contraseña">Contraseña</label>
+                    <input type="password" id="contraseña" name="password" placeholder="Escribe tu contraseña" required>
+                    <input type="submit" value="Registrarme">
+                </form>
+                <a href="{% url 'iniciar_sesion' %}" id="link">¿Ya tienes cuenta? Ingresa aquí</a>
+                {% include 'messages.html' %}
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

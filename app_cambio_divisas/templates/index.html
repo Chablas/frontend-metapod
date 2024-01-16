@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+</head>
+
+<body>
+    {% include 'top-nav.html' %}
+    <main class="contenedor">
+        <!--<img class="imagen-fondo" src="{% static 'images/fondo.jpg' %}">-->
+        <div class="parte1"></div>
+        <div class="parte2">
+            <div id="conversor">
+                <form action="{% url 'divisas' %}" method="GET">
+                    <!--<input type="text" id="abbr_primary" name="abbr_primary">-->
+                    <select name="abbr_primary">
+                        {% for divisa_list in divisas %}
+                            {% for divisa in divisa_list %}
+                                <option value="{{ divisa.abbr }}" {% if abbr_primary == divisa.abbr %}selected {% endif %} >{{ divisa.abbr }}</option>
+                            {% endfor %}
+                        {% endfor %}
+                    </select>
+                    <input type="text" id="cantidad" value="{% if resultado1 and resultado2 %} {{cantidad}} {% else %}1000{% endif %}" name="cantidad">
+                    <!--<input type="text" id="abbr_secondary" name="abbr_secondary">-->
+                    <select name="abbr_secondary">
+                        {% for divisa_list in divisas %}
+                            {% for divisa in divisa_list %}
+                                <option value="{{ divisa.abbr }}" {% if abbr_secondary == divisa.abbr %}selected {% endif %} >{{ divisa.abbr }}</option>
+                            {% endfor %}
+                        {% endfor %}
+                    </select>
+                    <input type="text" id="cantidad2" value="{% if resultado1 and resultado2 %} {{resultado1}} {% else %}1000{% endif %}" name="cantidad2">
+                    <input type="submit" value="Calcular">
+                </form>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static '/css/divisas.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    {% include 'top-nav.html' %}
+    <div class="contenedor">
+        <div class="parte1"></div>
+        <div class="parte2">
+            <div id="formulario">
+                <form action="{% url 'crear_divisa' %}" method="post">
+                    <label for="nombre">Nombre de divisa:</label>
+                    <input type="text" id="nombre" name="nombre">
+                    <label for="abbr">Acrónimo de divisa:</label>
+                    <input type="text" id="abbr" name="abbr">
+                    <input type="submit">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
