@@ -4,7 +4,6 @@ from django.shortcuts import render
 from app_cambio_divisas.services.usuarios import crear_empleado, service_iniciar_sesion, verify_islogged, service_cerrar_sesion
 from app_cambio_divisas.services.divisas import service_crear_divisa, service_obtener_tipos_de_cambio, service_obtener_todas_las_divisas
 from django.views.decorators.csrf import csrf_exempt
-from django.contrib import messages
 
 @csrf_exempt
 def index(request):
@@ -57,7 +56,7 @@ def cerrar_sesion(request):
 def registrar_usuario(request):
     if request.method == 'POST':
         response = crear_empleado(request)
-        return render(request, 'registrar-usuario.html', {'response': response})
+        return response
     template = loader.get_template('registrar-usuario.html')
     return HttpResponse(template.render())
 
@@ -68,4 +67,6 @@ def crear_divisas(request):
         response = service_crear_divisa(request)
         return render(request, 'divisas.html', top_nav_context)
     template = loader.get_template('divisas.html')
-    return render(request, 'divisas.html', top_nav_context)
+    return render(request, 'divisas.html', {
+            'top_nav_context': top_nav_context,
+            })

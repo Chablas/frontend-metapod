@@ -29,20 +29,24 @@ def service_iniciar_sesion(request):
         csrf_token = request.COOKIES.get('csrftoken')
         headers = {'X-CSRFToken': csrf_token, 'Content-Type': 'application/x-www-form-urlencoded'}
         response_create_user = requests.post(obtain_token_url, data=data, headers=headers)
+
         if response_create_user.status_code >= 400:
-            messages.error(request, "Hubo un error al intentar procesar la operación")
-            context = {
-                'mensaje_error': 'Error al iniciar sesión'
-            }
-            response = render(request, 'iniciar-sesion.html', context)
+            json_data =  response_create_user.json()
+            mensaje = json_data.get('detail')
+            messages.error(request, mensaje)
+            response = render(request, 'iniciar-sesion.html')
             return response
+        
         data2_json = json.dumps(data2)
         headers = {'Content-Type': 'application/json', 'X-CSRFToken': csrf_token}
         response_islogged = requests.put(login_state_url, data=data2_json, headers=headers)
+
         if response_islogged.status_code >= 400:
             response = render(request, 'iniciar-sesion.html', context)
             return response
+        
         aasdasdas = guardar_email_en_cookie(username)
+
         if response_create_user.status_code < 300:
             context = {
                 'mensaje_error': 'Error al iniciar sesión'
@@ -62,8 +66,16 @@ def crear_empleado(request):
         csrf_token = request.COOKIES.get('csrftoken')
         headers = {'X-CSRFToken': csrf_token}
         response_create_user = requests.post(create_user_url, json=data, headers=headers)
+        json_data =  response_create_user.json()
+        mensaje = json_data.get('detail')
+        if response_create_user.status_code >= 400:
+            messages.error(request, mensaje)
+            response = render(request, 'registrar-usuario.html')
+            return response
         if response_create_user.status_code < 300:
-            return 'Usuario creado exitosamente'
+            messages.success(request, mensaje)
+            response = render(request, 'registrar-usuario.html')
+            return response
         else:
             return 'Error al crear el usuario'
     else:

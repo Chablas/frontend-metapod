@@ -15,7 +15,7 @@
             <img src="{% static 'images/logo.jpg' %}" style="height: 60px; width: 60px;">
         </a>
         <div id="right">
-            {% if is_user_authenticated %}
+            {% if top_nav_context.is_user_authenticated %}
                 <a href="{% url 'divisas' %}">Conversor</a>
                 <a href="{% url 'crear_divisa' %}">Gestionar Divisas</a>
                 <a href="{% url 'cerrar_sesion' %}">Cerrar Sesión</a>
