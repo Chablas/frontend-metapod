@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(241, 243, 255);
+    background-image: linear-gradient(62deg, #398581 0%, #00C6B3 100%);
 }
 
 .contenedor {
@@ -82,5 +82,42 @@ form {
 
 input[type="submit"]:hover {
     background-color: #10e0cb;
+    cursor: pointer;
+}
+
+h1 {
+    color: #e8e9e9;
+    text-align: center;
+    font-size: 4em;
+    font-family: sans-serif;
+}
+
+p {
+    color: #e8e9e9;
+    text-align: center;
+    font-size: 1.5em;
+    font-family: sans-serif;
+}
+
+.parte1 > div {
+    margin-top: 20vh;
+    margin-left: 5vw;
+    margin-right: 15vw;
+}
+
+button {
+    background-color: #e8e9e9;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 10px;
+    border: 0px solid black;
+    margin-left: 10vw;
+    width: 50%;
+    color: #00C6B3;
+    font-size: 1.5em;
+    margin-top: 4.5vh;
+}
+
+button:hover {
     cursor: pointer;
 }

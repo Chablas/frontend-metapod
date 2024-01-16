@@ -1,6 +1,7 @@
 #right a:hover {
     background-color: #398581;
     color: #DAE8E7;
+    border-radius: 10px;
 }
 
 .nav {
@@ -13,11 +14,11 @@
     padding: 10px;
 }
 
-#right > a {
-    margin-left: 10px;
+#right > .a-top-nav {
+    margin-left: 25px;
     text-decoration: none;
     color: #DAE8E7;
-    font-weight: bold;
+    font-weight: 1000;
     padding: 12px;
 }
 
@@ -33,3 +34,15 @@ body {
     margin-left: 10%;
 }
 
+#registrate {
+    margin-left: 25px;
+    background-color: #DAE8E7;
+    color: #00C6B3;
+    font-weight: 1000;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    border-radius: 10px;
+    text-decoration: none;
+}

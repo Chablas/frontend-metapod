@@ -13,7 +13,15 @@
     {% include 'top-nav.html' %}
     <main class="contenedor">
         <!--<img class="imagen-fondo" src="{% static 'images/fondo.jpg' %}">-->
-        <div class="parte1"></div>
+        <div class="parte1">
+            <div>
+                <h1>El mejor tipo de cambio online</h1>
+                <p>Sé parte de nosotros</p>
+                <a href="{% url 'registrar_usuario' %}">
+                    <button>Regístrate ya</button>
+                </a>
+            </div>
+        </div>
         <div class="parte2">
             <div id="conversor">
                 <form action="{% url 'divisas' %}" method="GET">
