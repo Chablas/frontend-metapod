@@ -24,7 +24,7 @@
         </div>
         <div class="parte2">
             <div id="conversor">
-                <form action="{% url 'divisas' %}" method="GET">
+                <form action="{% url 'conversor' %}" method="GET">
                     <!--<input type="text" id="abbr_primary" name="abbr_primary">-->
                     <select name="abbr_primary">
                         {% for divisa_list in divisas %}

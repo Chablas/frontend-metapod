@@ -47,3 +47,12 @@ def service_obtener_tipos_de_cambio(request):
         venta = dato.get('venta')
         compra = dato.get('compra')
         return venta, compra
+    
+def service_obtener_todos_los_tipos_de_cambio(request):
+    url = f'{base_url}/get/all/tipo_cambio'
+    csrf_token = request.COOKIES.get('csrftoken')
+    headers = {'X-CSRFToken': csrf_token}
+    response_service = requests.get(url, headers=headers)
+    divisas = []
+    divisas.append(response_service.json())
+    return divisas

@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static '/css/index-divisas.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    {% include 'top-nav.html' %}
+    <div class="contenedor">
+        <div class="parte1"></div>
+        <div class="parte2">
+            <a href="{% url 'crear_divisa' %}">
+                <button>Nueva Divisa</button>
+            </a>
+            <table class="content-table table-sortable">
+                <thead>
+                    <tr>
+                        <th>Divisa base</th>
+                        <th>Divisa contraria</th>
+                        <th>Compra</th>
+                        <th>Venta</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for divisa_list in divisas %}
+                    {% for divisa in divisa_list %}
+                    <tr>
+                        <td>{{ divisa.abbr_primary }}</td>
+                        <td>{{ divisa.abbr_secondary }}</td>
+                        <td>{{ divisa.compra }}</td>
+                        <td>{{ divisa.venta }}</td>
+                    </tr>
+                    {% endfor %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="{% static '/css/tablesort.js' %}"></script>
+</body>
+
+</html>

@@ -2,7 +2,7 @@ from django.template import loader
 from django.http import HttpResponse
 from django.shortcuts import render
 from app_cambio_divisas.services.usuarios import crear_empleado, service_iniciar_sesion, verify_islogged, service_cerrar_sesion
-from app_cambio_divisas.services.divisas import service_crear_divisa, service_obtener_tipos_de_cambio, service_obtener_todas_las_divisas
+from app_cambio_divisas.services.divisas import service_crear_divisa, service_obtener_tipos_de_cambio, service_obtener_todas_las_divisas, service_obtener_todos_los_tipos_de_cambio
 from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
@@ -70,3 +70,12 @@ def crear_divisas(request):
     return render(request, 'divisas.html', {
             'top_nav_context': top_nav_context,
             })
+
+@csrf_exempt
+def index_divisas(request):
+    top_nav_context = top_nav(request)
+    divisas = service_obtener_todos_los_tipos_de_cambio(request)
+    return render(request, 'index-divisas.html', {
+        'top_nav_context': top_nav_context,
+        'divisas': divisas,
+    })
