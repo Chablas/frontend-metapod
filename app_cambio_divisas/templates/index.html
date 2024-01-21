@@ -16,7 +16,7 @@
         <div class="parte1">
             <div>
                 <h1>El mejor tipo de cambio online</h1>
-                <p>Sé parte de nosotros</p>
+                <p class="p">Sé parte de nosotros</p>
                 <a href="{% url 'registrar_usuario' %}">
                     <button>Regístrate ya</button>
                 </a>
@@ -33,7 +33,7 @@
                             {% endfor %}
                         {% endfor %}
                     </select>
-                    <input type="text" id="cantidad" value="{% if resultado1 and resultado2 %} {{cantidad}} {% else %}1000{% endif %}" name="cantidad">
+                    <input type="text" id="cantidad" value="{% if resultado1 >= 0 %} {{cantidad}} {% else %}1000{% endif %}" name="cantidad">
                     <!--<input type="text" id="abbr_secondary" name="abbr_secondary">-->
                     <select name="abbr_secondary">
                         {% for divisa_list in divisas %}
@@ -42,9 +42,10 @@
                             {% endfor %}
                         {% endfor %}
                     </select>
-                    <input type="text" id="cantidad2" value="{% if resultado1 and resultado2 %} {{resultado1}} {% else %}1000{% endif %}" name="cantidad2">
+                    <input type="text" id="cantidad2" value="{% if resultado1 >= 0 %} {{resultado1}} {% else %}1000{% endif %}" name="cantidad2">
                     <input type="submit" value="Calcular">
                 </form>
+                {% include 'messages.html' %}
             </div>
         </div>
     </main>

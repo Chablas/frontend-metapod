@@ -15,7 +15,7 @@
         <div class="parte1"></div>
         <div class="parte2">
             <a href="{% url 'crear_divisa' %}">
-                <button>Nueva Divisa</button>
+                <button class="nueva-divisa">Agregar Divisa</button>
             </a>
             <table class="content-table table-sortable">
                 <thead>
@@ -24,6 +24,7 @@
                         <th>Divisa contraria</th>
                         <th>Compra</th>
                         <th>Venta</th>
+                        <th>Editar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,6 +35,11 @@
                         <td>{{ divisa.abbr_secondary }}</td>
                         <td>{{ divisa.compra }}</td>
                         <td>{{ divisa.venta }}</td>
+                        <td>
+                            <a href="{% url 'editar_divisa' abbr_primary=divisa.abbr_primary abbr_secondary=divisa.abbr_secondary %}">
+                                <ion-icon name="create-outline"></ion-icon>
+                            </a>
+                        </td>
                     </tr>
                     {% endfor %}
                     {% endfor %}
@@ -42,6 +48,8 @@
         </div>
     </div>
     <script src="{% static '/css/tablesort.js' %}"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 
 </html>

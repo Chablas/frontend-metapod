@@ -2,7 +2,7 @@ import requests
 from django.http import JsonResponse, HttpResponse
 import json
 from django.template import loader
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 import logging
 
@@ -56,3 +56,19 @@ def service_obtener_todos_los_tipos_de_cambio(request):
     divisas = []
     divisas.append(response_service.json())
     return divisas
+
+def service_actualizar_tipo_de_cambio(request, abbr_primary, abbr_secondary):
+    url = f'{base_url}/put/divisa/tipo_cambio'
+    token = request.COOKIES['access_token']
+    headers = {'Authorization': f'Bearer {token}'}
+    data={
+            'abbr_primary':abbr_primary,
+            'abbr_secondary':abbr_secondary,
+            'compra': request.POST.get('compra'),
+            'venta': request.POST.get('venta'),
+        }
+    response_service = requests.put(url, json=data, headers=headers)
+    divisas = []
+    divisas.append(response_service.json())
+    response = redirect('/divisas')
+    return response

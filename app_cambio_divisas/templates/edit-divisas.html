@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static '/css/edit-divisas.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% include 'top-nav.html' %}
+    <div class="contenedor">
+        <div class="parte2">
+            <div class="formulario">
+                <h1>Actualizar divisa</h1>
+                <form action="{% url 'editar_divisa' abbr_primary=abbr_primary abbr_secondary=abbr_secondary %}" method="post">
+                    <label for="divisa_base">Divisa base:</label>
+                    <input type="text" id="divisa_base" name="abbr_primary" value="{{ abbr_primary }}" readonly>
+                    <label for="divisa_contraria">Divisa contraria:</label>
+                    <input type="text" id="divisa_contraria" name="abbr_secondary" value="{{ abbr_secondary }}" readonly>
+                    <label for="compra">Compra:</label>
+                    <input type="text" id="compra" name="compra" required>
+                    <label for="venta">Venta:</label>
+                    <input type="text" id="venta" name="venta" required>
+                    <input type="submit" value="Actualizar">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

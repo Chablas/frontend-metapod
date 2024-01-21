@@ -12,14 +12,14 @@
 <body>
     {% include 'top-nav.html' %}
     <div class="contenedor">
-        <div class="parte1"></div>
         <div class="parte2">
-            <div id="formulario">
+            <div class="formulario">
+                <h1>Crear divisa</h1>
                 <form action="{% url 'crear_divisa' %}" method="post">
                     <label for="nombre">Nombre de divisa:</label>
-                    <input type="text" id="nombre" name="nombre">
-                    <label for="abbr">Acrónimo de divisa:</label>
-                    <input type="text" id="abbr" name="abbr">
+                    <input type="text" id="nombre" name="nombre" placeholder="Nuevos soles">
+                    <label for="abbr">Abreviación de divisa o código ISO:</label>
+                    <input type="text" id="abbr" name="abbr" placeholder="PEN">
                     <input type="submit">
                 </form>
             </div>

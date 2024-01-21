@@ -2,8 +2,9 @@ from django.template import loader
 from django.http import HttpResponse
 from django.shortcuts import render
 from app_cambio_divisas.services.usuarios import crear_empleado, service_iniciar_sesion, verify_islogged, service_cerrar_sesion
-from app_cambio_divisas.services.divisas import service_crear_divisa, service_obtener_tipos_de_cambio, service_obtener_todas_las_divisas, service_obtener_todos_los_tipos_de_cambio
+from app_cambio_divisas.services.divisas import service_crear_divisa, service_obtener_tipos_de_cambio, service_obtener_todas_las_divisas, service_obtener_todos_los_tipos_de_cambio, service_actualizar_tipo_de_cambio
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib import messages
 
 @csrf_exempt
 def index(request):
@@ -12,18 +13,25 @@ def index(request):
     divisas = service_obtener_todas_las_divisas(request)
     
     if request.method == 'GET' and 'cantidad' in request.GET:
-        
-        venta, compra = service_obtener_tipos_de_cambio(request)
-        cantidad= request.GET.get('cantidad')
         abbr_primary = request.GET.get('abbr_primary')
         abbr_secondary = request.GET.get('abbr_secondary')
+        if abbr_primary == abbr_secondary:
+            mensaje='No se puede calcular el tipo de cambio de la misma moneda'
+            messages.error(request, mensaje)
+            return render(request, 'index.html', {
+            'top_nav_context': top_nav_context,
+            'divisas': divisas,
+            'abbr_primary': abbr_primary,
+            'abbr_secondary': abbr_secondary,
+        })
+        venta, compra = service_obtener_tipos_de_cambio(request)
+        cantidad= request.GET.get('cantidad')
+        
         resultado1 = (float(cantidad)*float(compra))
-        resultado2 = (float(cantidad)/float(venta))
         
         return render(request, 'index.html', {
             'top_nav_context': top_nav_context,
             'resultado1': resultado1,
-            'resultado2': resultado2,
             'divisas': divisas,
             'abbr_primary': abbr_primary,
             'abbr_secondary': abbr_secondary,
@@ -78,4 +86,16 @@ def index_divisas(request):
     return render(request, 'index-divisas.html', {
         'top_nav_context': top_nav_context,
         'divisas': divisas,
+    })
+
+@csrf_exempt
+def edit_divisas(request, abbr_primary, abbr_secondary):
+    top_nav_context = top_nav(request)
+    if request.method == 'POST':
+        response = service_actualizar_tipo_de_cambio(request, abbr_primary, abbr_secondary)
+        return response
+    return render(request, 'edit-divisas.html', {
+        'top_nav_context': top_nav_context,
+        'abbr_primary': abbr_primary,
+        'abbr_secondary': abbr_secondary,
     })

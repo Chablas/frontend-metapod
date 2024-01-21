@@ -12,6 +12,7 @@
     /*background-color: #001f3f;*/
     background-image: linear-gradient(62deg, #398581 0%, #00C6B3 100%);
     padding: 10px;
+    height: 10vh;
 }
 
 #right > .a-top-nav {
