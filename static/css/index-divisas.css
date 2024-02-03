@@ -89,3 +89,7 @@ button:hover {
     background-color: #10e0cb;
     cursor: pointer;
 }
+
+button {
+    transition: 0.3s;
+}

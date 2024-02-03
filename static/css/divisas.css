@@ -60,6 +60,7 @@ input[type="submit"] {
     border-radius: 15px;
     border: 0px solid black;
     width: 100%;
+    transition: 0.3s;
 }
 
 form {
