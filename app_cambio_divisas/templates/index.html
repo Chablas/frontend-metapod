@@ -12,16 +12,16 @@
 
 <body class="body-index">
     <nav class="nav">
-        <a class="logo" href="{% url 'conversor' %}" id="logo">
+        <a class="logo" href="{% url 'inicio' %}" id="logo">
             <img src="{% static 'images/logo.jpg' %}" style="height: 60px; width: 60px;">
         </a>
         <div id="right">
             {% if top_nav_context.is_user_authenticated %}
-                <a class="a-top-nav" href="{% url 'conversor' %}">Conversor</a>
-                <a class="a-top-nav" href="{% url 'index_divisas' %}">Gestionar Divisas</a>
+                <a class="a-top-nav" href="{% url 'inicio' %}">Inicio</a>
+                <a class="a-top-nav" href="{% url 'index_productos' %}">Gestionar Productos</a>
                 <a class="a-top-nav" href="{% url 'cerrar_sesion' %}">Cerrar Sesión</a>
             {% else %}
-                <a class="a-top-nav" href="{% url 'conversor' %}">Conversor</a>
+                <a class="a-top-nav" href="{% url 'inicio' %}">Inicio</a>
                 <a class="a-top-nav" href="{% url 'iniciar_sesion' %}">Iniciar Sesión</a>
                 <a id="registrate" href="{% url 'registrar_usuario' %}">Regístrate</a>
             {% endif %}
@@ -35,8 +35,8 @@
         </div>-->
         <div class="parte1">
             <div class="index_div1">
-                <p class="index_texto1 index_texto_grande index_color_1">El mejor <span class="bold">tipo de cambio</span>
-                    online para cambiar en <span class="bold">Lima, Perú. </span>Sé parte de nosotros</p>
+                <p class="index_texto1 index_texto_grande index_color_1">Encuentra las <span class="bold">mejores ofertas</span>
+                    de tecnología en <span class="bold">Lima, Perú. </span>Sé parte de nosotros</p>
                 <div class="index_div2">
                     <a class="index_logos1"><i class="ri-exchange-dollar-fill"></i></a>
                     <p class="index_color_1 index_p1">+ 2 millones de dólares negociados</p>
@@ -53,9 +53,10 @@
         </div>
         <div class="parte2">
             <div class="index_div1 index_div3">
+            <!--
             <div class="conversor">
-                <form class="index_form" action="{% url 'conversor' %}" method="GET">
-                    <!--<input type="text" id="abbr_primary" name="abbr_primary">-->
+                <form class="index_form" action="{% url 'inicio' %}" method="GET">
+                    <input type="text" id="abbr_primary" name="abbr_primary">XD
                     <div class="index_div2">
                     <select name="abbr_primary">
                         {% for divisa_list in divisas %}
@@ -66,7 +67,7 @@
                     </select>
                     <input type="text" id="cantidad" value="{% if resultado1 >= 0 %} {{cantidad}} {% else %}1000{% endif %}" name="cantidad">
                     </div>
-                    <!--<input type="text" id="abbr_secondary" name="abbr_secondary">-->
+                    <input type="text" id="abbr_secondary" name="abbr_secondary">XD
                     <div class="index_div2">
                     <select name="abbr_secondary">
                         {% for divisa_list in divisas %}
@@ -81,6 +82,7 @@
                 </form>
                 {% include 'messages.html' %}
             </div>
+        -->    
             <a class="index_div2 index_a1" href="{% url 'registrar_usuario' %}">
                 <button class="index_button1">Regístrate Ahora <i class="ri-arrow-right-line"></i></button>
             </a>
@@ -90,12 +92,12 @@
     
     <div class="bancos flexbox-container-bancos">
         <p class="flexbox-item-bancos">Bancos</p>
-        <img class="flexbox-item-bancos" src="{% static 'images/bancos/BCP.png' %}">
-        <img class="flexbox-item-bancos" src="{% static 'images/bancos/Interbank.jpg' %}">
-        <img class="flexbox-item-bancos" src="{% static 'images/bancos/BanBif.png' %}">
-        <img class="flexbox-item-bancos" src="{% static 'images/bancos/Scotiabank.png' %}">
-        <img class="flexbox-item-bancos" src="{% static 'images/bancos/BBVA.png' %}">
-        <img class="flexbox-item-bancos" src="{% static 'images/bancos/BancoPichincha.png' %}">
+        <img class="flexbox-item-bancos" src="{% static 'images/proveedores/HP.png' %}">
+        <img class="flexbox-item-bancos" src="{% static 'images/proveedores/lenovo.jpg' %}">
+        <img class="flexbox-item-bancos" src="{% static 'images/proveedores/deltron.png' %}">
+        <img class="flexbox-item-bancos" src="{% static 'images/proveedores/memorykings.jpg' %}">
+        <img class="flexbox-item-bancos" src="{% static 'images/proveedores/xiaomi.jpg' %}">
+        <img class="flexbox-item-bancos" src="{% static 'images/proveedores/samsung.png' %}">
     </div>
 
     <div class="index_background_white">

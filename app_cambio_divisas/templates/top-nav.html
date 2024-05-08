@@ -11,16 +11,16 @@
 
 <body class="body-top-nav">
     <nav class="nav">
-        <a class="logo" href="{% url 'conversor' %}" id="logo">
+        <a class="logo" href="{% url 'inicio' %}" id="logo">
             <img src="{% static 'images/logo.jpg' %}" style="height: 60px; width: 60px;">
         </a>
         <div id="right">
             {% if top_nav_context.is_user_authenticated %}
-                <a class="a-top-nav" href="{% url 'conversor' %}">Conversor</a>
-                <a class="a-top-nav" href="{% url 'index_divisas' %}">Gestionar Divisas</a>
+                <a class="a-top-nav" href="{% url 'inicio' %}">Inicio</a>
+                <a class="a-top-nav" href="{% url 'index_productos' %}">Gestionar productos</a>
                 <a class="a-top-nav" href="{% url 'cerrar_sesion' %}">Cerrar Sesión</a>
             {% else %}
-                <a class="a-top-nav" href="{% url 'conversor' %}">Conversor</a>
+                <a class="a-top-nav" href="{% url 'inicio' %}">Inicio</a>
                 <a class="a-top-nav" href="{% url 'iniciar_sesion' %}">Iniciar Sesión</a>
                 <a id="registrate" href="{% url 'registrar_usuario' %}">Regístrate</a>
             {% endif %}

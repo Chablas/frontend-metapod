@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from app_cambio_divisas.services.usuarios import crear_empleado, service_iniciar_sesion, verify_islogged, service_cerrar_sesion
 from app_cambio_divisas.services.divisas import service_crear_divisa, service_obtener_tipos_de_cambio, service_obtener_todas_las_divisas, service_obtener_todos_los_tipos_de_cambio, service_actualizar_tipo_de_cambio
+from app_cambio_divisas.services.productos import service_obtener_todos_los_productos, service_crear_producto
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 
@@ -80,12 +81,32 @@ def crear_divisas(request):
             })
 
 @csrf_exempt
+def crear_productos(request):
+    top_nav_context = top_nav(request)
+    if request.method == 'POST':
+        response = service_crear_producto(request)
+        return render(request, 'productos.html', top_nav_context)
+    template = loader.get_template('productos.html')
+    return render(request, 'productos.html', {
+            'top_nav_context': top_nav_context,
+            })
+
+@csrf_exempt
 def index_divisas(request):
     top_nav_context = top_nav(request)
     divisas = service_obtener_todos_los_tipos_de_cambio(request)
     return render(request, 'index-divisas.html', {
         'top_nav_context': top_nav_context,
         'divisas': divisas,
+    })
+
+@csrf_exempt
+def index_productos(request):
+    top_nav_context = top_nav(request)
+    productos = service_obtener_todos_los_productos(request)
+    return render(request, 'index-productos.html', {
+        'top_nav_context': top_nav_context,
+        'productos': productos,
     })
 
 @csrf_exempt

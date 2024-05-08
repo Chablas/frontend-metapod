@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static '/css/divisas.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    {% include 'top-nav.html' %}
+    <div class="contenedor">
+        <div class="parte2">
+            <div class="formulario">
+                <h1>Crear producto</h1>
+                <form action="{% url 'crear_producto' %}" method="post">
+                    <label for="nombre_producto">Nombre de producto:</label>
+                    <input type="text" id="nombre_producto" name="nombre_producto" placeholder="Laptop gamer">
+                    <label for="marca">Marca:</label>
+                    <input type="text" id="marca" name="marca" placeholder="Lenovo">
+                    <label for="precio">Precio:</label>
+                    <input type="text" id="precio" name="precio" placeholder="4000">
+                    <label for="nombre_proveedor">Proveedor:</label>
+                    <input type="text" id="nombre_proveedor" name="nombre_proveedor" placeholder="Lenovo Tienda Oficial">
+                    <label for="especificaciones">Especificaciones:</label>
+                    <input type="text" id="especificaciones" name="especificaciones">
+                    <label for="información_adicional">Información adicional:</label>
+                    <input type="text" id="información_adicional" name="información_adicional">
+                    <input type="submit">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static '/css/index-divisas.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    {% include 'top-nav.html' %}
+    <div class="contenedor">
+        <div class="parte1"></div>
+        <div class="parte2">
+            <a href="{% url 'crear_producto' %}">
+                <button class="nueva-divisa">Agregar Producto</button>
+            </a>
+            <table class="content-table table-sortable">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Producto</th>
+                        <th>Marca</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                        <th>Proveedor</th>
+                        <th>Especificaciones</th>
+                        <th>Información adicional</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for productos_list in productos %}
+                    {% for producto in productos_list %}
+                    <tr>
+                        <td>{{ producto.id }}</td>
+                        <td>{{ producto.nombre_producto }}</td>
+                        <td>{{ producto.marca }}</td>
+                        <td>{{ producto.precio }}</td>
+                        <td>{{ producto.stock }}</td>
+                        <td>{{ producto.nombre_proveedor }}</td>
+                        <td>{{ producto.especificaciones }}</td>
+                        <td>{{ producto.información_adicional }}</td>
+                        <td>
+                            <a></a>
+                                <ion-icon name="create-outline"></ion-icon>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="{% static '/css/tablesort.js' %}"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>

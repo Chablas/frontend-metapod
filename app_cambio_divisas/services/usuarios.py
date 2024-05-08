@@ -51,7 +51,7 @@ def service_iniciar_sesion(request):
             context = {
                 'mensaje_error': 'Error al iniciar sesión'
             }
-            response = redirect('/conversor')
+            response = redirect('/inicio')
             response.set_cookie('access_token', response_create_user.json()['access_token'], httponly=True, secure=True, samesite='Lax')
             response.set_cookie('usuario_email', username, httponly=True, secure=True, samesite='Lax')
             return response
