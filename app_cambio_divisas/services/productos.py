@@ -8,8 +8,8 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-#base_url = 'https://api-metapod.onrender.com'
-base_url = 'http://127.0.0.1:8000'
+base_url = 'https://api-metapod.onrender.com'
+#base_url = 'http://127.0.0.1:8000'
 
 def service_obtener_todos_los_productos(request):
     url=f'{base_url}/get/productos'
