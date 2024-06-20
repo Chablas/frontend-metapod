@@ -12,7 +12,7 @@ base_url = 'https://api-metapod.onrender.com'
 #base_url = 'http://127.0.0.1:8000'
 
 def service_obtener_todos_los_productos(request):
-    url=f'{base_url}/get/productos'
+    url=f'{base_url}/get/bienes'
     if request.method == 'GET':
         csrf_token = request.COOKIES.get('csrftoken')
         headers = {'X-CSRFToken': csrf_token}
@@ -22,7 +22,7 @@ def service_obtener_todos_los_productos(request):
         return productos
 
 def service_crear_producto(request):
-    url = f'{base_url}/post/producto'
+    url = f'{base_url}/post/bien'
     if request.method == 'POST':
         data = request.POST
         token = request.COOKIES['access_token']

@@ -1,5 +1,5 @@
 .parte1 {
-    background-image: linear-gradient(62deg, #398581 0%, #00C6B3 100%);
+    background-image: linear-gradient(62deg, #bca3c4 0%, #825382 100%);
     text-align: center;
     
 }
@@ -13,7 +13,7 @@ img {
 .parte2 {
     text-align: center;
     background-color: #e8e9e9;
-    color: #398581;
+    color: #825382;
     margin: 0px;
 }
 
@@ -68,7 +68,7 @@ input[type="password"] {
 }
 
 input[type="submit"] {
-    background-color: #00C6B3;
+    background-color: #825382;
     margin-top: 4vh;
     padding-top: 8px;
     padding-bottom: 8px;
@@ -79,7 +79,7 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #10e0cb;
+    background-color: #bca3c4;
     cursor: pointer;
 }
 
