@@ -1,234 +1,367 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{% static 'css/index.css' %}">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- (INICIO) CONFIGURACIÓN PARA TAILWIND CSS USANDO CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        clifford: '#da373d',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- (FIN) CONFIGURACIÓN PARA TAILWIND CSS USANDO CDN -->
+
 </head>
 
-<body class="body-index">
-    <nav class="nav">
-        <a class="logo" href="{% url 'inicio' %}" id="logo">
-            <img src="{% static 'images/logo.jpg' %}" style="height: 60px; width: 60px;">
-        </a>
-        <div id="right">
-            {% if top_nav_context.is_user_authenticated %}
-                <a class="a-top-nav" href="{% url 'inicio' %}">Inicio</a>
-                <a class="a-top-nav" href="{% url 'index_productos' %}">Gestionar Productos</a>
-                <a class="a-top-nav" href="{% url 'cerrar_sesion' %}">Cerrar Sesión</a>
-            {% else %}
-                <a class="a-top-nav" href="{% url 'inicio' %}">Inicio</a>
-                <a class="a-top-nav" href="{% url 'iniciar_sesion' %}">Iniciar Sesión</a>
-                <a id="registrate" href="{% url 'registrar_usuario' %}">Regístrate</a>
-            {% endif %}
-        </div>
-    </nav>
+<body>
+    <!-- (INICIO) COMPONENTE TAILWIND CSS STORE NAVIGATION / WITH FEATURED CATEGORIES (EDITADO) -->
+    <div class="bg-white">
 
-    
-    
-    <main class="contenedor">
-        <!--<img class="imagen-fondo" src="{% static 'images/fondo.jpg' %}">-->
-        <!--<div class="parte3">
-            <img src="{% static 'images/bitcoin-cash-bch-logo.png' %}" style="width: 80%; height: auto; min-width: 200px;">
-        </div>-->
-        <div class="parte1">
-            <div class="index_div1">
-                <p class="index_texto1 index_texto_grande index_color_1">Encuentra las <span class="bold">mejores ofertas</span>
-                    de tecnología en <span class="bold">Lima, Perú. </span>Sé parte de nosotros</p>
-                <div class="index_div2">
-                    <a class="index_logos1"><i class="ri-exchange-dollar-fill"></i></a>
-                    <p class="index_color_1 index_p1">+ 2 millones de dólares negociados</p>
-                </div>
-                <div class="index_div2">
-                    <a class="index_logos1"><i class="ri-account-pin-circle-fill"></i></a>
-                    <p class="index_color_1 index_p1">+ 100 mil personas confían en nosotros</p>
-                </div>
-                <div class="index_div2">
-                    <a class="index_logos1"><i class="ri-bank-line"></i></a>
-                    <p class="index_color_1 index_p1">+ 100 millones de soles ahorrados</p>
-                </div>
-            </div>
-        </div>
-        <div class="parte2">
-            <div class="index_div1 index_div3">
-            <!--
-            <div class="conversor">
-                <form class="index_form" action="{% url 'inicio' %}" method="GET">
-                    <input type="text" id="abbr_primary" name="abbr_primary">XD
-                    <div class="index_div2">
-                    <select name="abbr_primary">
-                        {% for divisa_list in divisas %}
-                            {% for divisa in divisa_list %}
-                                <option value="{{ divisa.abbr }}" {% if abbr_primary == divisa.abbr %}selected {% endif %} >{{ divisa.abbr }}</option>
-                            {% endfor %}
-                        {% endfor %}
-                    </select>
-                    <input type="text" id="cantidad" value="{% if resultado1 >= 0 %} {{cantidad}} {% else %}1000{% endif %}" name="cantidad">
+        <header class="relative bg-white">
+            <p
+                class="flex h-10 items-center justify-center bg-purple-600 px-4 text-sm font-medium text-white sm:px-6 lg:px-8">
+                Obtenga delivery gratis en compras mayores a 100 soles</p>
+
+            <nav aria-label="Top" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="border-b border-gray-200">
+                    <div class="flex h-16 items-center">
+                        <!-- Mobile menu toggle, controls the 'mobileMenuOpen' state. -->
+                        <button type="button" class="relative rounded-md bg-white p-2 text-gray-400 lg:hidden">
+                            <span class="absolute -inset-0.5"></span>
+                            <span class="sr-only">Open menu</span>
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                            </svg>
+                        </button>
+
+                        <!-- Logo -->
+                        <div class="ml-4 flex lg:ml-0">
+                            <a href="{% url 'inicio' %}">
+                                <span class="sr-only">Your Company</span>
+                                <img class="h-8 w-auto" src="{% static 'images/logo.jpg' %}" alt="">
+                            </a>
+                        </div>
+
+                        <!-- Flyout menus -->
+                        <div class="hidden lg:ml-8 lg:block lg:self-stretch">
+                            <div class="flex h-full space-x-8">
+                                <a href="{% url 'Categorías de los Productos' %}"
+                                    class="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800">Productos</a>
+                                <a href="#"
+                                    class="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800">Servicios</a>
+                                <a href="#"
+                                    class="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800">Empresa</a>
+                            </div>
+                        </div>
+
+                        <div class="ml-auto flex items-center">
+                            <div class="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
+                                <a href="{% url 'iniciar_sesion' %}"
+                                    class="text-sm font-medium text-gray-700 hover:text-gray-800">Iniciar
+                                    Sesión</a>
+                                <span class="h-6 w-px bg-gray-200" aria-hidden="true"></span>
+                                <a href="{% url 'registrar_usuario' %}"
+                                    class="text-sm font-medium text-gray-700 hover:text-gray-800">Crear
+                                    cuenta</a>
+                            </div>
+
+                            <div class="hidden lg:ml-8 lg:flex">
+                                <a href="#" class="flex items-center text-gray-700 hover:text-gray-800">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/Flag_of_Peru.svg"
+                                        alt="" class="block h-auto w-5 flex-shrink-0">
+                                    <span class="ml-3 block text-sm font-medium">PEN</span>
+                                    <span class="sr-only">, change currency</span>
+                                </a>
+                            </div>
+
+                            <!-- Search -->
+                            <div class="flex lg:ml-6">
+                                <a href="#" class="p-2 text-gray-400 hover:text-gray-500">
+                                    <span class="sr-only">Search</span>
+                                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                        stroke="currentColor" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                                    </svg>
+                                </a>
+                            </div>
+
+                            <!-- Cart -->
+                            <div class="ml-4 flow-root lg:ml-6">
+                                <a id="open-button" class="group -m-2 flex items-center p-2">
+                                    <svg class="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
+                                        fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                        aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                                    </svg>
+                                    <span
+                                        class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">2</span>
+                                    <span class="sr-only">items in cart, view bag</span>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    <input type="text" id="abbr_secondary" name="abbr_secondary">XD
-                    <div class="index_div2">
-                    <select name="abbr_secondary">
-                        {% for divisa_list in divisas %}
-                            {% for divisa in divisa_list %}
-                                <option value="{{ divisa.abbr }}" {% if abbr_secondary == divisa.abbr %}selected {% endif %} >{{ divisa.abbr }}</option>
-                            {% endfor %}
-                        {% endfor %}
-                    </select>
-                    <input type="text" id="cantidad2" value="{% if resultado1 >= 0 %} {{resultado1}} {% else %}1000{% endif %}" name="cantidad2">
+                </div>
+            </nav>
+        </header>
+
+    </div>
+    <!-- (FIN) COMPONENTE TAILWIND CSS STORE NAVIGATION / WITH FEATURED CATEGORIES (EDITADO) -->
+
+    <!-- (INICIO) COMPONENTE TAILWIND CSS PROMO SECTIONS / WITH IMAGE TILES -->
+    <div class="relative overflow-hidden bg-white">
+        <div class="pb-80 pt-16 sm:pb-40 sm:pt-24 lg:pb-48 lg:pt-40">
+            <div class="relative mx-auto max-w-7xl px-4 sm:static sm:px-6 lg:px-8">
+                <div class="sm:max-w-lg">
+                    <h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Las rebajas de otoño ya
+                        están aquí</h1>
+                    <p class="mt-4 text-xl text-gray-500">Este año, nuestra nueva colección de cómputo te
+                        brindará los mejores elementos
+                        tecnológicos del mundo de ahora.
+                    </p>
+                </div>
+                <div>
+                    <div class="mt-10">
+                        <!-- Decorative image grid -->
+                        <div aria-hidden="true"
+                            class="pointer-events-none lg:absolute lg:inset-y-0 lg:mx-auto lg:w-full lg:max-w-7xl">
+                            <div
+                                class="absolute transform sm:left-1/2 sm:top-0 sm:translate-x-8 lg:left-1/2 lg:top-1/2 lg:-translate-y-1/2 lg:translate-x-8">
+                                <div class="flex items-center space-x-6 lg:space-x-8">
+                                    <div class="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
+                                        <div class="h-64 w-44 overflow-hidden rounded-lg sm:opacity-0 lg:opacity-100">
+                                            <img src="{% static 'images/inicio/headphone.jpg' %}"
+                                                alt="" class="h-full w-full object-cover object-center">
+                                        </div>
+                                        <div class="h-64 w-44 overflow-hidden rounded-lg">
+                                            <img src="{% static 'images/inicio/laptop.jpg' %}" alt=""
+                                                class="h-full w-full object-cover object-center">
+                                        </div>
+                                    </div>
+                                    <div class="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
+                                        <div class="h-64 w-44 overflow-hidden rounded-lg">
+                                            <img src="{% static 'images/inicio/monitor.jfif' %}"
+                                                alt="" class="h-full w-full object-cover object-center">
+                                        </div>
+                                        <div class="h-64 w-44 overflow-hidden rounded-lg">
+                                            <img src="{% static 'images/inicio/tarjeta_grafica.jpg' %}"
+                                                alt="" class="h-full w-full object-cover object-center">
+                                        </div>
+                                        <div class="h-64 w-44 overflow-hidden rounded-lg">
+                                            <img src="{% static 'images/inicio/teclado.jfif' %}"
+                                                alt="" class="h-full w-full object-cover object-center">
+                                        </div>
+                                    </div>
+                                    <div class="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
+                                        <div class="h-64 w-44 overflow-hidden rounded-lg">
+                                            <img src="{% static 'images/inicio/cpu.png' %}"
+                                                alt="" class="h-full w-full object-cover object-center">
+                                        </div>
+                                        <div class="h-64 w-44 overflow-hidden rounded-lg">
+                                            <img src="{% static 'images/inicio/ram.jpg' %}" alt=""
+                                                class="h-full w-full object-cover object-center">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="{% url 'Categorías de los Productos' %}"
+                            class="inline-block rounded-md border border-transparent bg-purple-600 px-8 py-3 text-center font-medium text-white hover:bg-indigo-700">Mirar
+                            Colección</a>
                     </div>
-                    <input type="submit" value="Calcular">
-                </form>
-                {% include 'messages.html' %}
-            </div>
-        -->    
-            <a class="index_div2 index_a1" href="{% url 'registrar_usuario' %}">
-                <button class="index_button1">Regístrate Ahora <i class="ri-arrow-right-line"></i></button>
-            </a>
-        </div>
-        </div>
-    </main>
-    
-    <div class="bancos flexbox-container-bancos">
-        <p class="flexbox-item-bancos">Proveedores</p>
-        <img class="flexbox-item-bancos" src="{% static 'images/proveedores/HP.png' %}">
-        <img class="flexbox-item-bancos" src="{% static 'images/proveedores/lenovo.jpg' %}">
-        <img class="flexbox-item-bancos" src="{% static 'images/proveedores/deltron.png' %}">
-        <img class="flexbox-item-bancos" src="{% static 'images/proveedores/memorykings.jpg' %}">
-        <img class="flexbox-item-bancos" src="{% static 'images/proveedores/xiaomi.jpg' %}">
-        <img class="flexbox-item-bancos" src="{% static 'images/proveedores/samsung.png' %}">
-    </div>
-
-    <div class="index_background_white">
-        <h1 class="index_texto2 index_texto_mediano index_color_3 ">¿Cómo Funciona?</h1>
-    </div>
-    
-    <div class="index_carrusel">
-        <!-- Slideshow container -->
-        <div class="slideshow-container">
-    
-            <!-- Full-width images with number and caption text -->
-            <div class="mySlides fade ">
-                <div class="numbertext index_color_2 bold">1 / 3</div>
-                <img class="index_img_carrusel" src="{% static 'images/celular_dedo.png' %}" style="width:100%">
-                <p class="index_color_4  block">Cotiza el monto a cambiar y selecciona en qué cuenta deseas recibirlo.</p>
-            </div>
-    
-            <div class="mySlides fade">
-                <div class="numbertext index_color_2 bold">2 / 3</div>
-                <img class="index_img_carrusel" src="{% static 'images/celular_tarjeta.png' %}" style="width:100%">
-                <p class="index_color_4  ">Transfiere el monto desde tu banca online a la cuenta indicada y conserva el comprobante.</p>
-            </div>
-    
-            <div class="mySlides fade">
-                <div class="numbertext index_color_2 bold">3 / 3</div>
-                <img class="index_img_carrusel" src="{% static 'images/billetera.png' %}" style="width:100%">
-                <p class="index_color_4  ">Verifica tu operación ingresando el número del comprobante y recibe el dinero en tu cuenta.</p>
-            </div>
-    
-            <!-- Next and previous buttons -->
-            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-            <a class="next" onclick="plusSlides(1)">&#10095;</a>
-        </div>
-        <br>
-    
-        <!-- The dots/circles -->
-        <div style="text-align:center">
-            <span class="dot" onclick="currentSlide(1)"></span>
-            <span class="dot" onclick="currentSlide(2)"></span>
-            <span class="dot" onclick="currentSlide(3)"></span>
-        </div>
-    </div>
-
-    <div class="index_carrusel_2">
-        <div class="index_carrusel_img_1">
-            <p class="index_color_2 bold">1.</p>
-            <img class="index_img_carrusel" src="{% static 'images/celular_dedo.png' %}" style="width:100%">
-            <p class="index_color_4 index_width1 ">Cotiza el monto a cambiar y selecciona en qué cuenta deseas recibirlo.</p>
-        </div>
-        <div class="index_carrusel_img_1">
-            <p class="index_color_2 bold">2.</p>
-            <img class="index_img_carrusel" src="{% static 'images/celular_tarjeta.png' %}" style="width:100%">
-            <p class="index_color_4 index_width1 ">Transfiere el monto desde tu banca online a la cuenta indicada y conserva el comprobante.</p>
-        </div>
-        <div class="index_carrusel_img_1">
-            <p class="index_color_2 bold">3.</p>
-            <img class="index_img_carrusel" src="{% static 'images/billetera.png' %}" style="width:100%">
-            <p class="index_color_4 index_width1 ">Verifica tu operación ingresando el número del comprobante y recibe el dinero en tu cuenta.</p>
-        </div>
-    </div>
-
-    <div class="index_seccion">
-        <h1 class="index_seccion1">Cambia tu dinero rápido y seguro</h1>
-        <div class="index_seccion2">
-            <button class="index_button_3">Cambia aquí</button>
-        </div>
-    </div>
-
-    <div class="index_background_white index_height">
-        <h1 class="index_color_2 index_texto2">Descubre lo que dicen nuestros clientes</h1>
-        <p>Conoce de primera mano lo que es comprar productos con Compusave.</p>
-        <div class="seccion_info">
-            <div class="seccion_subpartes">
-                <p>“Mi experiencia al usar la aplicación fue estupenda. Es sencilla, transparente en las tasas de cambio, y me permitió ahorrar tiempo. Es la mejor app que he usado”.</p>
-                <div class="index_otro_div"><p>Chanel Ramos</p></div>
-            </div>
-            <div class="seccion_subpartes">
-                <p>“La mejor casa de cambio online, siempre se preocupan porque sea un servicio bueno y honesto. Me llaman incluso cuando pasó algún error y lo solucionan rápido”.</p>
-                <p>Grecia Retamozo</p>
-            </div>
-            <div class="seccion_subpartes">
-                <p>“Hasta el momento estoy muy contento con el servicio brindado por Metapod Finance. Nunca tuve problemas con la app, es de mucha ayuda. La recomiendo”.</p>
-                <p>Jorge Suarez</p>
-            </div>
-            <div class="seccion_subpartes">
-                <p>“Metapod Finance tiene una muy buena app, sencilla de usar y con muy buenos precios de venta y compra del dólar. Es la mejor casa de cambio online”.</p>
-                <p>Reni Ravina</p>
+                </div>
             </div>
         </div>
     </div>
+    <!-- (FIN) COMPONENTE TAILWIND CSS PROMO SECTIONS / WITH IMAGE TILES -->
 
-    
+    <!-- (INICIO) COMPONENTE TAILWIND CSS SHOPPING CARTS / SLIDE-OVER -->
+    <div id="slide-over" class="relative z-10" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+        <!--
+          Background backdrop, show/hide based on slide-over state.
+      
+          Entering: "ease-in-out duration-500"
+            From: "opacity-0"
+            To: "opacity-100"
+          Leaving: "ease-in-out duration-500"
+            From: "opacity-100"
+            To: "opacity-0"
+        -->
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
 
-    <footer class="section__container footer__container footer">
-        <div class="footer_parte_1 footer_subpartes">
-            <div class="footer__logo"><img src="{% static 'images/logo.jpg' %}" alt="logo" style="height: 90px; width: 90px;" /></div>
-            <p style="text-align: center;">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec elit ipsum, pulvinar sed convallis et, scelerisque et purus.
-            </p>
-            <div class="footer__socials">
-              <a href="#"><i class="ri-facebook-fill"></i></a>
-              <a href="#"><i class="ri-instagram-line"></i></a>
-              <a href="#"><i class="ri-twitter-fill"></i></a>
+        <div class="fixed inset-0 overflow-hidden">
+            <div class="absolute inset-0 overflow-hidden">
+                <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+                    <!--
+                Slide-over panel, show/hide based on slide-over state.
+      
+                Entering: "transform transition ease-in-out duration-500 sm:duration-700"
+                  From: "translate-x-full"
+                  To: "translate-x-0"
+                Leaving: "transform transition ease-in-out duration-500 sm:duration-700"
+                  From: "translate-x-0"
+                  To: "translate-x-full"
+              -->
+                    <div class="pointer-events-auto w-screen max-w-md">
+                        <div class="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
+                            <div class="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
+                                <div class="flex items-start justify-between">
+                                    <h2 class="text-lg font-medium text-gray-900" id="slide-over-title">Carrito de
+                                        compra
+                                    </h2>
+                                    <div class="ml-3 flex h-7 items-center">
+                                        <button id="close-button" type="button"
+                                            class="relative -m-2 p-2 text-gray-400 hover:text-gray-500">
+                                            <span class="absolute -inset-0.5"></span>
+                                            <span class="sr-only">Close panel</span>
+                                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                                stroke="currentColor" aria-hidden="true">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M6 18L18 6M6 6l12 12" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="mt-8">
+                                    <div class="flow-root">
+                                        <ul role="list" class="-my-6 divide-y divide-gray-200">
+                                            <li class="flex py-6">
+                                                <div
+                                                    class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                                                    <img src="https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg"
+                                                        alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt."
+                                                        class="h-full w-full object-cover object-center">
+                                                </div>
+
+                                                <div class="ml-4 flex flex-1 flex-col">
+                                                    <div>
+                                                        <div
+                                                            class="flex justify-between text-base font-medium text-gray-900">
+                                                            <h3>
+                                                                <a href="#">Teclado</a>
+                                                            </h3>
+                                                            <p class="ml-4">S/90.00</p>
+                                                        </div>
+                                                        <p class="mt-1 text-sm text-gray-500">Multicolor</p>
+                                                    </div>
+                                                    <div class="flex flex-1 items-end justify-between text-sm">
+                                                        <p class="text-gray-500">Cantidad: 1</p>
+
+                                                        <div class="flex">
+                                                            <button type="button"
+                                                                class="font-medium text-indigo-600 hover:text-indigo-500">Quitar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="flex py-6">
+                                                <div
+                                                    class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                                                    <img src="https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg"
+                                                        alt="Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch."
+                                                        class="h-full w-full object-cover object-center">
+                                                </div>
+
+                                                <div class="ml-4 flex flex-1 flex-col">
+                                                    <div>
+                                                        <div
+                                                            class="flex justify-between text-base font-medium text-gray-900">
+                                                            <h3>
+                                                                <a href="#">Teclado</a>
+                                                            </h3>
+                                                            <p class="ml-4">S/32.00</p>
+                                                        </div>
+                                                        <p class="mt-1 text-sm text-gray-500">Negro</p>
+                                                    </div>
+                                                    <div class="flex flex-1 items-end justify-between text-sm">
+                                                        <p class="text-gray-500">Cantidad: 1</p>
+
+                                                        <div class="flex">
+                                                            <button type="button"
+                                                                class="font-medium text-indigo-600 hover:text-indigo-500">Quitar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+
+                                            <!-- More products... -->
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
+                                <div class="flex justify-between text-base font-medium text-gray-900">
+                                    <p>Subtotal</p>
+                                    <p>S/262.00</p>
+                                </div>
+                                <p class="mt-0.5 text-sm text-gray-500">Envío e IGV calculados en Checkout.</p>
+                                <div class="mt-6">
+                                    <a href="#"
+                                        class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Checkout</a>
+                                </div>
+                                <div class="mt-6 flex justify-center text-center text-sm text-gray-500">
+                                    <p>
+                                        o
+                                        <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500">
+                                            Continua Comprando
+                                            <span aria-hidden="true"> &rarr;</span>
+                                        </button>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="footer_parte_2 footer_subpartes">
-            <h4>Empresa</h4>
-          <a href="#">Empresa</a>
-          <a href="#">Nosotros</a>
-          <a href="#">Lorem ipsum</a>
-          <a href="#">Lorem ipsum</a>
-        </div>
-        <div class="footer_parte_3 footer_subpartes">
-            <h4>Más información</h4>
-          <a href="#">Blogs</a>
-          <a href="#">Preguntas Frecuentes</a>
-          <a href="#">Lorem ipsum</a>
-        </div>
-        <div class="footer_parte_4 footer_subpartes">
-            <h4>Contacto</h4>
-          <a href="#">Contáctanos</a>
-          <a href="#">Políticas de Privacidad</a>
-          <a href="#">Términos y condiciones</a>
-          <a href="#">Lorem ipsum</a>
-        </div>
-      </footer>
-      <script src="{% static '/css/carousel.js' %}"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    </div>
+    <!-- (FIN) COMPONENTE TAILWIND CSS SHOPPING CARTS / SLIDE-OVER -->
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+
+            // (INICIO) ABRIR Y CERRAR COMPONENTE TAILWIND CSS SHOPPING CARTS / SLIDE-OVER
+            const slideOver = document.getElementById('slide-over');
+            const closeButton = document.getElementById('close-button');
+            const openButton = document.getElementById('open-button');
+            slideOver.classList.remove('block');
+            slideOver.classList.add('hidden');
+
+            function openSlideOver() {
+                slideOver.classList.remove('hidden');
+                slideOver.classList.add('block');
+            }
+
+            function closeSlideOver() {
+                slideOver.classList.remove('block');
+                slideOver.classList.add('hidden');
+            }
+
+            openButton.addEventListener('click', openSlideOver);
+            closeButton.addEventListener('click', closeSlideOver);
+            // (FIN) ABRIR Y CERRAR COMPONENTE TAILWIND CSS SHOPPING CARTS / SLIDE-OVER
+
+        });
+
+    </script>
+
 </body>
 
 </html>

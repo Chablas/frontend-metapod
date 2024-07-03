@@ -62,6 +62,26 @@ def cerrar_sesion(request):
     return response
 
 @csrf_exempt
+def producto_overview(request):
+    template = loader.get_template('producto_overview.html')
+    return HttpResponse(template.render())
+
+@csrf_exempt
+def productos_categorias(request):
+    template = loader.get_template('productos_categorias.html')
+    return HttpResponse(template.render())
+
+@csrf_exempt
+def productos_categorias_teclados(request):
+    template = loader.get_template('productos_categorias_teclados.html')
+    return HttpResponse(template.render())
+
+@csrf_exempt
+def dashboard_inicio(request):
+    template = loader.get_template('dashboard.html')
+    return HttpResponse(template.render())
+
+@csrf_exempt
 def registrar_usuario(request):
     if request.method == 'POST':
         response = crear_empleado(request)
