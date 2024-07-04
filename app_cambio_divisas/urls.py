@@ -13,4 +13,5 @@ urlpatterns = [
     path('productos/categorias', views.productos_categorias, name="Categorías de los Productos"),
     path('productos/categorias/teclados', views.productos_categorias_teclados, name="Productos de Teclados"),
     path('dashboard/inicio', views.dashboard_inicio, name="Inicio del Dashboard"),
+    path('dashboard/productos', views.dashboard_productos, name="Productos en Dashboard"),
 ]

@@ -82,6 +82,11 @@ def dashboard_inicio(request):
     return HttpResponse(template.render())
 
 @csrf_exempt
+def dashboard_productos(request):
+    template = loader.get_template('dashboard_productos.html')
+    return HttpResponse(template.render())
+
+@csrf_exempt
 def registrar_usuario(request):
     if request.method == 'POST':
         response = crear_empleado(request)
